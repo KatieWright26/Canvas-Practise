@@ -2,20 +2,18 @@
 function Circle(positionX, positionY, radius, colorString) {
 	this.radius = radius
 	this.positionY = positionY
-	// console.log(positionY)
 	this.positionX = positionX
-	// console.log(positionX)
 	this.colorString = colorString
 }
 
-var circles = generateCircles(6)
+var circles = generateCircles(9)
 
 function generateCircles(circlesPerBoard) {
 	var board = []
 	for (var i = 0; i < circlesPerBoard; i++) {
 		var row = []
 		for (var j = 0; j < circlesPerBoard; j++) {
-			row.push(new Circle(12.5+j*25,12.5+i*25, 6, "rgb(" + Math.floor(255-20*i)+ "," + Math.floor(90-20*j) + ", 0)"))
+			row.push(new Circle(50+j*40,50+i*40, 30, "rgb(" + Math.floor(255-10*i)+ "," + Math.floor(200-10*j) + ", 100)"))
 		}
 		board.push(row)
 	}
@@ -26,8 +24,6 @@ function clickIsInCircle(e) {
 
 	var xPosition = e.clientX
 	var yPosition = e.clientY
-	console.log(xPosition, yPosition)
-
 
 	for(var i = 0; i < circles.length; i++) {
 		for(var j = 0; j < circles.length; j++) {
@@ -35,16 +31,16 @@ function clickIsInCircle(e) {
 			var circle = circles[i][j]
 
 			if((Math.pow((xPosition - circle.positionX - circle.radius), 2) + Math.pow((yPosition - circle.positionY - circle.radius), 2)) < Math.pow(circle.radius, 2)) {
-				console.log("click in circle")
-				console.log(circle)
-				return true
-			} else { 
-				console.log(xPosition, yPosition)
+			console.log(circle.colorString)
+			circle.colorString = "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + Math.random() * 255 + ")"
+			console.log(circle.colorString, circle)
+			draw()
+
+			return true
 			}
 
 		} 
 	}
-	return false
 }
 
 function draw() { 
@@ -62,6 +58,6 @@ function draw() {
 		}
 	}
 
-	canvas.addEventListener('click', clickIsInCircle, false)
+	canvas.addEventListener('mousemove', clickIsInCircle)
 
 }
