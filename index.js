@@ -6,14 +6,14 @@ function Circle(positionX, positionY, radius, colorString) {
 	this.colorString = colorString
 }
 
-var circles = generateCircles(9)
+var circles = generateCircles(90)
 
 function generateCircles(circlesPerBoard) {
 	var board = []
 	for (var i = 0; i < circlesPerBoard; i++) {
 		var row = []
 		for (var j = 0; j < circlesPerBoard; j++) {
-			row.push(new Circle(50+j*40,50+i*40, 30, "rgb(" + Math.floor(255-10*i)+ "," + Math.floor(200-10*j) + ", 100)"))
+			row.push(new Circle(50+j*40,50+i*40, 10, "rgb(" + Math.floor(255-10*i)+ "," + Math.floor(200-10*j) + ", 100)"))
 		}
 		board.push(row)
 	}
@@ -32,7 +32,7 @@ function clickIsInCircle(e) {
 
 			if((Math.pow((xPosition - circle.positionX - circle.radius), 2) + Math.pow((yPosition - circle.positionY - circle.radius), 2)) < Math.pow(circle.radius, 2)) {
 			console.log(circle.colorString)
-			circle.colorString = "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + Math.random() * 255 + ")"
+			circle.colorString = "rgb(" + Math.random() * 200 + "," + Math.random() * 255 + Math.random() * 255 + ")"
 			console.log(circle.colorString, circle)
 			draw()
 
